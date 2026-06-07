@@ -1,0 +1,5 @@
+subset,MAE,RMSE,R2,sMAPE_%
+train_global_log,0.0363,0.0462,0.9988,23.18
+train_global_cases,444.7453,1812.9674,0.9988,18.65
+test_global_log,0.3752,0.5323,0.8759,29.92
+test_global_cases,12150.8316,53322.833,0.6441,52.51

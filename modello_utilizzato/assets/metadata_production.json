@@ -1,0 +1,42 @@
+{
+  "id": "catboost_dengue_2026",
+  "version": "1.0.0",
+  "deployment_date": "2026-06-07",
+  "model_file": "modello_utilizzato/assets/catboost_dengue_2026.cbm",
+  "feature_spec": "modello_utilizzato/assets/feature_columns.json",
+  "reference_test_set": "modello_utilizzato/assets/test_reference.csv",
+  "train_data": "DatasetFinale/train.csv",
+  "test_data": "DatasetFinale/test.csv",
+  "results": "risultati/",
+  "framework": "catboost",
+  "python_version": "3.10",
+  "target": "log_cases_per_100k",
+  "task": "forecasting mensile di dengue normalizzato per popolazione (casi/100k, scala log)",
+  "input_spec": {
+    "n_features": 39,
+    "feature_list_ref": "modello_utilizzato/assets/feature_columns.json#catboost.feature_columns",
+    "categorical_features": ["economy"],
+    "countries": ["ARG", "BOL", "BRA", "CRI", "GTM", "HND", "MEX", "PER", "PRY", "THA", "URY"],
+    "temporal_lags": "1, 2, 3, 12 mesi",
+    "rolling_windows": "3, 6, 12 mesi"
+  },
+  "output_spec": {
+    "raw_prediction": "log_cases_per_100k (log1p-scaled)",
+    "to_cases_per_100k": "numpy.expm1(raw_prediction)",
+    "to_absolute_cases": "expm1(raw_prediction) * population / 100000"
+  },
+  "metric_summary": {
+    "space": "log_cases_per_100k",
+    "train_period": "2014-2021",
+    "test_period": "2022-2023",
+    "mse": 0.283,
+    "mae": 0.375,
+    "rmse": 0.532,
+    "r2": 0.876
+  },
+  "smoke_test": "modello_utilizzato/tests/smoke_inference.py",
+  "expected_output_range": {
+    "log_cases_per_100k": {"min": 0.0, "max": 10.0},
+    "cases_per_100k": {"min": 0.0, "max": 10000.0}
+  }
+}

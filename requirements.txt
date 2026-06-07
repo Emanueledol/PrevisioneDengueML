@@ -1,0 +1,36 @@
+# Dipendenze del progetto — dengue monthly forecasting
+# Python 3.10+
+# Generato manualmente da ispezione degli import (2026-06-07)
+
+# Core data processing
+numpy>=1.24
+pandas>=2.0
+scipy>=1.11
+
+# Machine learning — tree-based
+scikit-learn>=1.3
+xgboost>=2.0
+catboost>=1.2
+
+# Machine learning — deep learning
+torch>=2.0
+
+# Hyperparameter optimization
+optuna>=3.3
+
+# Explainability
+shap>=0.43
+
+# Geospatial / climate data (solo per ETL Fase1, non richiesto per inferenza)
+xarray>=2023.6
+netCDF4>=1.6
+
+# Visualization
+matplotlib>=3.7
+
+# Serialization
+joblib>=1.3
+
+# Reporting
+openpyxl>=3.1   # per model_comparison.xlsx
+reportlab>=4.0  # per PDF reports (se rigenerazione richiesta)
