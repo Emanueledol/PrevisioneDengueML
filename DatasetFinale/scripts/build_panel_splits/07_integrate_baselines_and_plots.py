@@ -106,7 +106,7 @@ def main():
         combined = baseline_global.copy()
     if not models_df.empty:
         # models_df has method, mse, mae, rmse
-        models_df = models_df.rename(columns={'method': 'method'})
+        pass  # models_df already has 'method' column
         # ensure columns
         for c in ['mse','mae','rmse']:
             if c not in models_df.columns:
@@ -130,7 +130,7 @@ def main():
 
     if mlp_preds is not None:
         mdf = per_country_metrics(mlp_preds, 'mlp_pred_log')
-        by_country = pd.concat([by_country, mdf.rename(columns={'method':'method'})], ignore_index=True, sort=False)
+        by_country = pd.concat([by_country, mdf], ignore_index=True, sort=False)
     if cat_preds is not None:
         cdf = per_country_metrics(cat_preds, 'catboost_pred_log')
         by_country = pd.concat([by_country, cdf.rename(columns={'method':'method'})], ignore_index=True, sort=False)

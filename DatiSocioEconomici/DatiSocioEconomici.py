@@ -1,5 +1,6 @@
 import wbgapi as wb
-import pandas as pd #libreria per gestione dati
+import pandas as pd
+from pathlib import Path
 
 # Sud America, Messico, Thailandia + India
 my_countries = ['ARG', 'BOL', 'BRA', 'CRI', 'GTM', 'HND', 'MEX', 'PRY', 'PER', 'URY', 'THA', 'IND']
@@ -30,7 +31,8 @@ df['series'] = df['series'].map(indicators)
 df = df.groupby(['economy', 'series']).apply(lambda x: x.interpolate(limit_direction='both')).reset_index(drop=True)
 
 # 6. Salvataggio in CSV
-df.to_csv('dati_socio_economici_tesi.csv', index=False)
+out_path = Path(__file__).parent / 'dati_socio_economici_tesi.csv'
+df.to_csv(out_path, index=False)
 
-print("File salvato come: dati_socio_economici_tesi.csv")
+print(f"File salvato: {out_path}")
 print(df.head())

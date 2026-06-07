@@ -11,12 +11,18 @@ OUT_REPORT = Path(__file__).parents[1] / "reports" / "04_temporal_features.md"
 def add_lags_and_rolls(df: pd.DataFrame) -> pd.DataFrame:
     df = df.sort_values(["economy", "year", "month"]).copy()
 
-    # Required lag columns on target spaces
+    # Lag epidemiologici
     lag_cols = ["cases", "cases_per_100k", "log_cases_per_100k"]
     lags = [1, 2, 3, 12]
     for col in lag_cols:
         for lag in lags:
             df[f"{col}_lag{lag}"] = df.groupby("economy")[col].shift(lag)
+
+    # Lag climatici (t2m e tp_mm con lag 1, 2, 3)
+    for col in ["t2m", "tp_mm"]:
+        if col in df.columns:
+            for lag in [1, 2, 3]:
+                df[f"{col}_lag{lag}"] = df.groupby("economy")[col].shift(lag)
 
     # Rolling means - use shifted series to avoid leakage
     roll_defs = [("cases_per_100k", [3, 6, 12]), ("log_cases_per_100k", [3, 6, 12])]

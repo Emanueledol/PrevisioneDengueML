@@ -1,11 +1,13 @@
 import xarray as xr
 import pandas as pd
 import os
+from pathlib import Path
 
 # 1. PERCORSI DEI FILE
-folder_geologici = "DatiGeologici"
-folder_socio = "DatiSocioEconomici"
-folder_epidemiologici = "DatiEpidemiologici"
+ROOT = Path(__file__).resolve().parents[3]
+folder_geologici = str(ROOT / "DatiGeologici")
+folder_socio = str(ROOT / "DatiSocioEconomici")
+folder_epidemiologici = str(ROOT / "DatiEpidemiologici")
 file_dengue = f"{folder_epidemiologici}/dataset_unito_fixed.xlsx"
 
 # 2. MAPPA REGIONI/PAESI
@@ -110,12 +112,11 @@ df_final = df_final.dropna(axis=1, how='all')
 df_final = df_final[df_final['year'] < 2024]
 
 
-df_final.to_csv('Dataset_Tesi_MENSILE_2014_2024.csv', index=False)
-
-
+out_csv = Path(__file__).resolve().parents[2] / "dataset_raw.csv"
+df_final.to_csv(out_csv, index=False)
 
 print("\n------------------------------------------------")
 print("SUCCESSO: Dataset Mensile (2014-2024) Creato!")
-print(f"File salvato: Dataset_Tesi_MENSILE_2014_2024.csv")
+print(f"File salvato: {out_csv}")
 print(f"Totale righe: {len(df_final)}")
 print("------------------------------------------------")

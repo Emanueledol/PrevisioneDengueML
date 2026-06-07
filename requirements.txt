@@ -21,9 +21,12 @@ optuna>=3.3
 # Explainability
 shap>=0.43
 
-# Geospatial / climate data (solo per ETL Fase1, non richiesto per inferenza)
+# Geospatial / climate data (solo per ETL, non richiesto per inferenza)
 xarray>=2023.6
 netCDF4>=1.6
+
+# World Bank data download (solo per ETL)
+wbgapi>=1.3
 
 # Visualization
 matplotlib>=3.7

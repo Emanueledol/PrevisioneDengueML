@@ -9,6 +9,7 @@ Output in risultati/:
 """
 
 import sys
+sys.stdout.reconfigure(encoding='utf-8')
 import json
 from pathlib import Path
 

@@ -96,7 +96,7 @@ def train_mlp():
 
 def train_catboost():
     try:
-        from catboost import CatBoostRegressor, Pool
+        from catboost import CatBoostRegressor
     except Exception:
         return None, "catboost_not_installed"
 
